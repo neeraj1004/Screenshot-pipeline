@@ -1,0 +1,25 @@
+{
+  "name": "screenshot-pipeline",
+  "version": "1.0.0",
+  "description": "This project automates the process of capturing and updating a screenshot of your website's homepage.",
+  "main": "index.js",
+  "scripts": {
+    "serve": "serve .",
+    "screenshot": "node scripts/screenshot.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neeraj1004/Screenshot-pipeline.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/neeraj1004/Screenshot-pipeline/issues"
+  },
+  "homepage": "https://github.com/neeraj1004/Screenshot-pipeline#readme",
+  "dependencies": {
+    "puppeteer": "^21.3.8",
+    "serve": "^14.2.0"
+  }
+}
