@@ -1,0 +1,45 @@
+name: Generate Screenshot
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  screenshot:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Install Puppeteer Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libx11-dev libxkbcommon-x11-0 libnss3
+
+      - name: Build and Serve the App
+        run: |
+          npm run build
+          npx serve -s build &
+          sleep 10 # Wait for server to start
+
+      - name: Run Screenshot Script
+        run: node scripts/screenshot.js
+
+      - name: Commit and Push Screenshot
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add screenshot.png
+          git commit -m "Update screenshot"
+          git push
+        continue-on-error: true
